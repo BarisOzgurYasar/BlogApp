@@ -8,8 +8,8 @@ export default function Post() {
             alt="" />
         <div className="postInfo">
             <div className="postCats">
-                <span className="potsCat">Music</span>                
-                <span className="potsCat">Life</span>                
+                <span className="potsCat">Music </span>                
+                <span className="potsCat">Life </span>                
             </div>
             <span className="postTitle">
                 Lorem ipsum dolor sit amet 
@@ -20,6 +20,8 @@ export default function Post() {
         </div>
             <p className="postDesc">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ipsum laboriosam totam consequuntur, reiciendis corporis.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
             </p>
     </div>
   )

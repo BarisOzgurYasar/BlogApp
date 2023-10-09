@@ -6,7 +6,7 @@ export default function Sidebar() {
         <div className="sidebarItem">
             <span className="sidebarTitle">ABOUT ME</span>
             <img 
-                src="https://www.gamespew.com/wp-content/uploads/2020/10/Baldurs-Gate-3-6-1.jpg"
+                src="https://upload.wikimedia.org/wikipedia/tr/1/12/Baldur%27s_Gate_3_cover_art.jpg"
                 alt="" />
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero vitae officia, saepe, 
