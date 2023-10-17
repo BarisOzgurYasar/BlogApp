@@ -1,16 +1,29 @@
+import { Link, useLocation } from 'react-router-dom';
 import './singlePost.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function SinglePost() {
+  const location = useLocation();
+  const path = location.pathname.split('/')[2];
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get('/posts/' + path);
+      setPost(res.data);
+    };
+    getPost();
+  }, [path]);
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          src="https://images.immediate.co.uk/production/volatile/sites/3/2023/08/Radio-Times-How-to-get-a-powerful-Baldurs-Gate-3-sword-early-in-the-game-4076f99.jpg?quality=90&resize=980,654"
-          alt=""
-          className="singlePostImg"
-        />
+        {post.photo && (
+          <img src={post.photo} alt="" className="singlePostImg" />
+        )}
+
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {post.title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fa-regular fa-pen-to-square"></i>
             <i className="singlePostIcon fa-regular fa-trash-can"></i>
@@ -18,42 +31,16 @@ export default function SinglePost() {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>Baris</b>
+            Author:
+            <Link to={`/?user = ${post.username}`} className="link">
+              <b>{post.username}</b>
+            </Link>
           </span>
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
-          doloremque asperiores impedit neque fugiat, corrupti vitae fugit
-          repellendus? Animi mollitia excepturi eveniet quaerat, maiores hic
-          molestiae, culpa doloremque voluptas aliquid ipsum quasi ea aspernatur
-          debitis ipsa! Minus quibusdam corrupti fuga pariatur nihil incidunt
-          obcaecati cupiditate! Totam ducimus necessitatibus cum magni deleniti
-          eligendi veritatis recusandae commodi voluptatem facilis sequi
-          possimus incidunt illo aperiam ullam numquam maxime dignissimos
-          voluptate in , laboriosam accusamus aut. Numquam obcaecati laborum
-          eligendi in fugit, nostrum sapiente cumque veritatis! Suscipit, ipsum,
-          placeat officiis nemo veritatis iure numquam minima ullam modi,
-          mollitia nam id ratione sapiente. Amet, alias labore.molestiae, culpa
-          doloremque voluptas aliquid ipsum quasi ea aspernatur debitis ipsa!
-          Minus quibusdam corrupti fuga pariatur nihil incidunt obcaecati
-          cupiditate! Totam ducimus necessitatibus cum magni deleniti eligendi
-          veritatis recusandae commodi voluptatem facilis sequi possimus
-          incidunt illo aperiam ullam numquam maxime dignissimos voluptate in ,
-          laboriosam accusamus aut. Numquam obcaecati laborum eligendi in fugit,
-          nostrum sapiente cumque veritatis! Suscipit, ipsum, placeat officiis
-          nemo veritatis iure numquam minima ullam modi, mollitia nam id ratione
-          sapiente. Amet, alias labore.molestiae, culpa doloremque voluptas
-          aliquid ipsum quasi ea aspernatur debitis ipsa! Minus quibusdam
-          corrupti fuga pariatur nihil incidunt obcaecati cupiditate! Totam
-          ducimus necessitatibus cum magni deleniti eligendi veritatis
-          recusandae commodi voluptatem facilis sequi possimus incidunt illo
-          aperiam ullam numquam maxime dignissimos voluptate in , laboriosam
-          accusamus aut. Numquam obcaecati laborum eligendi in fugit, nostrum
-          sapiente cumque veritatis! Suscipit, ipsum, placeat officiis nemo
-          veritatis iure numquam minima ullam modi, mollitia nam id ratione
-          sapiente. Amet, alias labore.
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );
